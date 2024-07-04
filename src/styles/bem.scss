@@ -1,0 +1,56 @@
+/**
+ * BEM 他是一种css架构实现的一种面向对象的css编码格式 
+ * BEM实际上是Block、Element、Modifier的缩写，分别为块层、元素层、修饰符层，element UI 也使用的是这种架构
+ * Block —— 块层 书写规则： .block {}
+ * Element —— 元素层 书写规则： .block__element {}
+ * Modifier —— 修饰符层 书写规则： .block--modifier {}
+ */
+
+
+$block-sel: "-" !default;
+$element-sel: "__" !default;
+$modifier-sel: "--" !default;
+// $namespace: 'cma' !default;
+
+
+@mixin B($block) {
+  // $B: $namespace + $block-sel + $block; //变量
+  $Block: $block; //变量
+
+  .#{$Block} {
+    @content;
+  }
+}
+
+// 子集
+@mixin BB($block) {
+  $selector: &;
+
+  @at-root {
+    #{$selector + $block-sel + $block} {
+      @content;
+    }
+  }
+}
+
+
+@mixin E($element) {
+  $selector: &;
+
+  @at-root {
+    #{$selector + $element-sel + $element} {
+      @content;
+    }
+  }
+}
+
+
+@mixin M($modifier) {
+  $selector: &;
+
+  @at-root {
+    #{$selector + $modifier-sel + $modifier} {
+      @content;
+    }
+  }
+}
